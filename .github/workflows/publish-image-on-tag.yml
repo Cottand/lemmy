@@ -16,8 +16,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/setup-buildx-action@v2
+        name: Set up Docker Buildx
       - name: Build the hello-docker Docker image
         run: |
           TAG=${{ github.ref }}
-          docker build -f docker/Dockerfile . --tag ghcr.io/cottand/lemmy-metrics:${TAG:10} --build-arg="CARGO_BUILD_FEATURES=prometheus-metrics" --build-arg="RUST_RELEASE_MODE=release"
+          docker buildx build -f docker/Dockerfile . --tag ghcr.io/cottand/lemmy-metrics:${TAG:10} --build-arg="CARGO_BUILD_FEATURES=prometheus-metrics" --build-arg="RUST_RELEASE_MODE=release"
           docker push ghcr.io/cottand/lemmy-metrics
