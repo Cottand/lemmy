@@ -3,7 +3,7 @@ name: Docker Image CI
 on:
   push:
     tags:
-      - '0.*' # Push events to matching 0.*
+      - '*' # Push events to matching 0.*
 jobs:
   publish-docker:
     runs-on: ubuntu-latest
