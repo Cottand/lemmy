@@ -19,5 +19,5 @@ jobs:
       - name: Build the hello-docker Docker image
         run: |
           TAG=${{ github.ref }}
-          docker build . --tag ghcr.io/cottand/lemmy-metrics:${TAG:10} --build-arg="CARGO_BUILD_FEATURES=prometheus-metrics" --build-arg="RUST_RELEASE_MODE=release"
+          docker build -f docker/Dockerfile . --tag ghcr.io/cottand/lemmy-metrics:${TAG:10} --build-arg="CARGO_BUILD_FEATURES=prometheus-metrics" --build-arg="RUST_RELEASE_MODE=release"
           docker push ghcr.io/cottand/lemmy-metrics
